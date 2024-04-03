@@ -289,6 +289,7 @@ const emitEvent = async (jobId: string, event: string, data: any) => {
   await job.changeDelay(0);
 };
 
+// TODO: need to handle cases where events are received before the job is created
 setTimeout(() => {
   emitEvent(jobId, "wait-for-order", {
     order: {
