@@ -1,0 +1,23 @@
+{
+  "name": "simple-workflows",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun index.ts"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@bull-board/express": "^5.15.3",
+    "@types/express": "^4.17.21",
+    "bullmq": "^5.5.0",
+    "dayjs": "^1.11.10",
+    "express": "^4.19.2",
+    "nanoid": "^5.0.6",
+    "resend": "^3.2.0"
+  }
+}
