@@ -16,8 +16,16 @@ export type WaitForEvent = (
 export type Step = {
   getCachedTasks: () => CachedTasks;
   sleep: (id: string, duration: duration.Duration) => Promise<void>;
-  run: (id: string, fn: () => Promise<any>) => Promise<any>;
+  run: (
+    id: string,
+    fn: () => Promise<any>,
+    options?: {
+      maxAttempts?: number;
+    }
+  ) => Promise<any>;
   waitForEvent: WaitForEvent;
 };
 
-export type Handler = (payload: { event: string; step: Step }) => {};
+export type Handler<ReturnValue> = (payload: {
+  step: Step;
+}) => Promise<ReturnValue> | ReturnValue;
