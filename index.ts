@@ -6,37 +6,10 @@ import { bullBoard } from "./server";
 import { Resend } from "resend";
 import { nanoid } from "nanoid";
 import { REDIS_CONFIG } from "./constants";
+import { QueueFunction } from "./queue-function";
+import { Step, WaitForEventOptions } from "./types";
 
 dayjs.extend(duration);
-
-type CachedTasks = {
-  [id: string]: any;
-};
-
-type WaitForEventOptions = {
-  timeout?: duration.Duration;
-};
-
-type WaitForEvent = (id: string, options: WaitForEventOptions) => Promise<any>;
-
-type Step = {
-  getCachedTasks: () => CachedTasks;
-  sleep: (id: string, duration: duration.Duration) => Promise<void>;
-  run: (id: string, fn: () => Promise<any>) => Promise<any>;
-  waitForEvent: WaitForEvent;
-};
-
-type Handler = (payload: { event: string; step: Step }) => {};
-
-class QueueFunction {
-  id: string;
-  handler: Handler;
-
-  constructor(id: string, handler: Handler) {
-    this.id = id;
-    this.handler = handler;
-  }
-}
 
 const createFunction = (
   options: {
